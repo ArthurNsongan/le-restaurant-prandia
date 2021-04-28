@@ -1,0 +1,226 @@
+body {
+  margin: 0;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url('./fonts/PlayfairDisplay.ttf') format('truetype')
+}
+
+.font-2 {
+  font-family: 'Playfair Display' !important;
+  /* font-weight: 500; */
+}
+
+.Page__Heading {
+  letter-spacing: 8px;
+}
+
+.h1 {
+  font-size: 42px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.Container {
+  display: block;
+  padding: 40px 50px ;
+  min-height: 100vh;
+}
+
+.Container h1, .Container h2, .Container h3, .Container h4, .Container h5, .Container h6 {
+  display: inline-block;
+}
+
+.Plates {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 50%;
+  overflow: hidden;
+  padding: 60px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Plat__Card {
+  position: relative;
+  padding: 50px;
+  width: max-content;
+  /* height: max-content; */
+}
+
+.Plat__Card:hover .Plat__Card__Text .h1 {
+    transform: translateX(110px);
+    transition: all 0.3s ease-in;
+    opacity: 0;
+}
+
+.Plat__Card img {
+  width: 400px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.Plat__Card__Text .h1 {
+  font-size: 35px;
+  box-shadow: 1px 1px 3px #8080809b;
+  display: block;
+  color: black !important;
+  z-index: 10;
+  left: 150px;
+  background-color: white;
+  padding: 20px;
+  position: absolute;
+  top: 100px;
+  width: 300px;
+  height: fit-content;
+  font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.Dark {
+  color: white !important;
+  background-color: black !important;
+}
+
+.padding-top {
+  padding-top: 60px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.Text {
+  max-width: 800px;
+}
+
+.my-0 {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.pageLoader {
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  z-index: 99999;
+  position: fixed;
+  background-color: white;
+}
+
+.addPlateBtn, .toggleFavBtn, .toggleFavBtn:hover {
+  border: none;
+  margin-right: 25px;
+  font-family: inherit !important;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: 2px solid red;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.toggleFavBtn, .addPlateBtn:hover {
+  border: 2px solid red;
+  background-color: white;
+  color: red;
+  font-weight: 600;
+  transition: all 0.2s ease-in;
+}
+
+.Plate__Container__Text {
+  background-color: white;
+  position: relative;
+  margin-top: -100px;
+  display: inline-block;
+  padding: 50px 7%;
+  max-width: 600px;
+  margin-left: 100px;
+  width: 100%;
+  box-shadow: 1px 1px 5px #6b6b6b61;
+  /* padding: 5px 20px; */
+  color: black;
+}
+
+.Cart__Item__Name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.Cart__Item__Price {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.Cart__Item__Total {
+  font-size: 18px;
+}
+
+.Cart__Item__Total .totalPrice {
+  font-weight: 700;
+}
+
+.Cart__TableList {
+  width: 100% !important;
+}
+
+.Cart__TableList thead td {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px 0px;
+}
+
+.Cart__TableList thead td.remove {
+  width: 50px;
+}
+
+.Cart__TableList tbody tr {
+  border-bottom: 1px solid gray;
+}
+
+.Cart__TableList tbody td {
+  padding-top: 30px;
+  padding-bottom: 30px ;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  font-weight: 500;
+
+}
+
+.Cart {
+  position: relative;
+}
+
+.Toasts {
+  position: absolute;
+  right: 0;
+  z-index: 999999;
+  top: 100px;
+  max-width: 400px ;
+  width: 100%;
+}
