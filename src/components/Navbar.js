@@ -16,6 +16,7 @@ function Navbar() {
                         <li><NavLink exact to="/" activeClassName="active">Accueil</NavLink></li>
                         <li><NavLink to="/menu" activeClassName="active">Menu</NavLink></li>
                         <li><NavLink to="/cart" activeClassName="active">Panier</NavLink></li>
+                        <li><NavLink to="/admin/menu" activeClassName="active">Admin</NavLink></li>
                     </ul>
                 </div>
             </div>

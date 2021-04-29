@@ -1,6 +1,7 @@
 const initialState = {
     cartPlates: [ ],
     favoritesPlates: [ ],
+    reservations: [  ],
     formatNumber: ( price ) => {
         return price
     }
@@ -82,6 +83,17 @@ function cardActionManagerReducer(state = initialState, action) {
                 cartPlates: cartPlatesTmp
             }
             console.log(cartPlatesTmp)
+            return nextState || state
+        case 'NEW_RESERVATION': 
+            console.log("Inside NEW_CART")
+            let reservTmp = state.reservations
+            reservTmp.push(action.value)
+            nextState = {
+                ...state,
+                cartPlates: state.cartPlates.splice(0, state.cartPlates.length)
+            }
+            console.log(reservTmp)
+            console.log(nextState.cartPlates)
             return nextState || state
         default:
             return state

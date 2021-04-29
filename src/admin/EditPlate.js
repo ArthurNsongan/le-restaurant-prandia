@@ -1,18 +1,22 @@
 import { Component } from 'react'
 import axios from 'axios'
+import menu from '../data/menu'
 
-class AddPlate extends Component {
+class EditPlate extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            cPlate: {
-                image: null,
-                category: "Boisson",
-                name: "",
-                description: "",
-                price: 0,
-            }
+        
+    }
+
+    state = {
+        cPlate: {
+            image: null,
+            category: "Boisson",
+            name: "",
+            description: "",
+            price: 0,
+
         }
     }
 
@@ -23,6 +27,25 @@ class AddPlate extends Component {
     //         console.log(res)
     //     })
     // }
+
+    componentDidMount() {
+
+        let plateId = this.props.match.params.id;
+
+        var config = {
+            mode: "cors",
+            headers: {
+                'x-api-key': '6088038a28bf9b609975a78f'    
+            }
+        }
+        axios.get('https://leprand-2879.restdb.io/rest/menu', config)
+        .then( res => {
+            let cPlateTmp = res.data.find( (item) => { return item._id === plateId } )
+            this.setState({ cPlate: cPlateTmp})
+        })
+        setTimeout(() => console.log(this.state.cPlate), 2000)
+
+    }
 
     handleChange = (e) => {
         if(e.target.name === "image") {
@@ -53,8 +76,6 @@ class AddPlate extends Component {
             method: 'POST',
             body: formData
         };
-
-        // this.savePlate(this.state.cPlate)
         
         axios.post(`https://api.cloudinary.com/v1_1/dvfqx32z9/image/upload/`, formData)
             .then( res => {
@@ -82,15 +103,16 @@ class AddPlate extends Component {
                 'x-api-key': '6088038a28bf9b609975a78f'    
             }
         }
-        axios.post(`https://leprand-2879.restdb.io/rest/menu`, cPlate, config)
+        axios.put(`https://leprand-2879.restdb.io/rest/menu/${cPlate._id}`, cPlate, config)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
                 alert("Le plat a été bien enregistré !!!")
+
 	    //On traite la reponse obtenue
         }).catch(erreur => {
             //On traite ici les erreurs éventuellement survenues
-            alert("Serveur indisponible !")
+            alert("serveur indisponible")
             console.log(erreur);
         });
     }
@@ -99,12 +121,12 @@ class AddPlate extends Component {
         return(
             <div className="AddLogCont">
                 <div className="AddLogForm">
-                <form id="form" onSubmit={this.handleSubmit} onLoad={ () => this.loadForm() } encType="">
+                <form id="form" onSubmit={this.handleSubmit} encType="">
                     {/* <label> 
                         Nom : 
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
                     </label> */}
-                    <h3 className="">Ajouter un plat</h3>
+                    <h3 className="">Modifier un plat</h3>
 
                     <div className="ALF__Label">
                         <label> Catégorie : </label>
@@ -159,11 +181,10 @@ class AddPlate extends Component {
                 </form>
             
                 </div>
-            
             </div>
         )
     }
 
 }
 
-export default AddPlate
+export default EditPlate

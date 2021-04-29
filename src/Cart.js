@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import plus from './components/plus.svg'
 import minus from './components/minus.svg'
 import close from './components/x.svg'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
-// import Toast from './components/Toast'
+import Toast from './components/Toast'
 
 function Cart(props) {
 
@@ -34,6 +35,29 @@ function Cart(props) {
         setCR(!cartRender)
     }
 
+    const makeReserv = () => {
+        const reserv = {
+            plates: props.cartPlates,
+            date: new Date()
+            // date: new DateTime().FullDay
+        }
+        const Toasts = document.querySelector("div.Toasts")
+        // props.dispatch({ type: "NEW_RESERVATION", value: reserv })
+        // setCartPlates(props.cartPlates)
+        // Toasts.appendChild(newToast)
+        let newToast = <Toast />
+        console.log(newToast)
+        ReactDOM.render( newToast, Toasts)
+        // if(item.count < 2) { 
+        //     item.count++ 
+        //     console.log(item)
+        //     props.dispatch({ type: "UPDATE_CART", value: item})
+        //     setCartPlates(props.cartPlates)
+        // }
+        // console.log(cartPlates)
+        setCR(!cartRender)
+    }
+
     const decreaseElCount = (item) => {
         console.log(item)
         if(item.count > 1) {
@@ -51,7 +75,7 @@ function Cart(props) {
             <Navbar />
             <PageLoader stop={true}/>
             <div className="Container">
-                <h1 className="padding-top font-2 h1 Page__Heading">CART</h1>
+                <h1 className="padding-top font-2 h1 Page__Heading">Panier</h1>
                 <div className="Cart__List">
                     {/* { props.cartPlates.map( (item, index) => (
                         <div className="Cart__Item" key={index}>
@@ -114,7 +138,13 @@ function Cart(props) {
                         </tbody>
                     </table>
                     <h2 className="Total__Price">Total : { totalCartElements } Fcfa</h2>
+                    <div className="d-flex">
+                        <button className="makeReserv" onClick={makeReserv}><h2>Valider la Commande</h2></button>
+                    </div>
                 </div>
+            </div>
+            <div className="Toasts">
+                <Toast />
             </div>
         </div>
     );

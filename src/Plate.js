@@ -19,12 +19,12 @@ class Plate extends Component {
 
     toggleFavoritePlate = () => {
         let isFavTmp = this.state.isFavorite
-        this.setState({ isFavorite: !isFavTmp })
         const action = {
             type: "TOGGLE_FAVORITE",
             value: this.state.plate
         }
         this.props.dispatch(action)
+        this.setState({ isFavorite: !isFavTmp })
     }
 
     addPlateToCart = () => {
@@ -33,6 +33,7 @@ class Plate extends Component {
             value: this.state.plate
         }
         this.props.dispatch(action)
+        console.log(this.props.favoritesPlaces)
     }
 
     componentDidMount() {
@@ -47,11 +48,12 @@ class Plate extends Component {
             }
         }
         axios.get('https://leprand-2879.restdb.io/rest/menu', config)
-        // menu
         .then( res => {
                 console.log(res)
                 let plateTmp = res.data.filter( (item, index) => ( item._id === params.id ) )
-                this.setState({ plate: plateTmp[0] })
+                console.log("Mes Favoris")
+                let isFavTmp = this.props.favoritesPlates.findIndex( (item) => (item._id === plateTmp[0]._id) ) !== -1
+                this.setState({ plate: plateTmp[0], isFavorite: isFavTmp })
                 setTimeout( () => { this.setState({ isLoaded: true}) } , 500)
                 // setEntries( Plates.filter( item => ( item.category === "Plat" ) ) )
                 // setDesserts( desserts = Plates.filter( item => ( item.category === "Dessert") ) )
@@ -81,7 +83,7 @@ class Plate extends Component {
                                     this.state.isFavorite ? 
                                     (<div className="d-flex align-items-center">
                                         <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                                            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd"/>
                                         </svg>
                                         Préféré
                                     </div>) : "Ajouter aux préférés"
@@ -99,7 +101,7 @@ class Plate extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    favoritesPlaces: state.favoritesPlaces,
+    favoritesPlates: state.favoritesPlates,
     cartPlates: state.cartPlates,
     formatNumber: state.formatNumber
 })

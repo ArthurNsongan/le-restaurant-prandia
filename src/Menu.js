@@ -5,6 +5,7 @@ import menu from './data/menu'
 import { useEffect, useState } from 'react';
 import PageLoader from './components/PageLoader';
 import MenuItem from './components/MenuItem';
+import { connect } from 'react-redux';
 
 function Menu(props) {
 
@@ -23,20 +24,20 @@ function Menu(props) {
             axios.get('https://leprand-2879.restdb.io/rest/menu', config)
             // menu
             .then( res => {
-                console.log(res)
+                // console.log(res)
                 setPlates(res.data)
                 // setEntries( Plates.filter( item => ( item.category === "Plat" ) ) )
                 // setDesserts( desserts = Plates.filter( item => ( item.category === "Dessert") ) )
                 // setBoissons( Plates.filter( item => ( item.category === "Boisson") ) )
                 setLoaded(true)
-                console.log(plates)
+                // console.log(plates)
             })
         }
     })
 
-    const toggleFavoritePlate = () => {
-        const action = { type: "TOGGLE_FAVORITE", value: {}}
-    }
+    // const toggleFavoritePlate = (item) => {
+    //     const action = { type: "TOGGLE_FAVORITE", value: }
+    // }
 
     return(
         <div className="Menu">
@@ -57,7 +58,10 @@ function Menu(props) {
                             //         <button>Ajouter aux plats préférés</button>
                             //     </div>
                             // </div>
-                            <MenuItem plate={plate} key={index} />
+                            <MenuItem plate={plate} key={index} 
+                            isFavorite = {
+                                props.favoritesPlates.findIndex( (item) => (item._id === plate._id) ) !== -1
+                            }/>
                         ))}     
                     </div>
                 </div>
@@ -71,7 +75,10 @@ function Menu(props) {
                             //         <div className="h1">{plate.name}</div>
                             //     </div>
                             // </div>
-                            <MenuItem plate={plate} key={index} />
+                            <MenuItem plate={plate} key={index} 
+                                isFavorite = {
+                                    props.favoritesPlates.findIndex( (item) => (item._id === plate._id) ) !== -1
+                                } />
                         ))} 
                     </div>
                 </div>
@@ -85,7 +92,10 @@ function Menu(props) {
                             //         <div className="h1">{plate.name}</div>
                             //     </div>
                             // </div>
-                            <MenuItem plate={plate} key={index} />
+                            <MenuItem plate={plate} key={index} 
+                            isFavorite = {
+                                props.favoritesPlates.findIndex( (item) => (item._id === plate._id) ) !== -1
+                            }/>
                         ))} 
                     </div>
                 </div>
@@ -94,4 +104,9 @@ function Menu(props) {
     )
 }
 
-export default Menu
+const mapStateToProps = state => ({
+    favoritesPlates: state.favoritesPlates,
+    cartPlates: state.cartPlates
+})
+
+export default connect(mapStateToProps)(Menu)
