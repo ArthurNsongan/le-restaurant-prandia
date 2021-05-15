@@ -1,0 +1,63 @@
+.NavBar {
+    display: flex;
+    z-index: 9999;
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+}
+
+.NavBar__Logo {
+    font-size: 20px;
+    font-weight: 700 !important;
+    letter-spacing: 4px;
+}
+
+.NavBar__Container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 25px;
+}
+
+.NavBar__Logo {
+    display: flex;
+    align-items: center;
+}
+
+.NavBar__Container__List {
+    display: flex;
+    align-items: center;
+}
+
+.NavBar__Container__List .NavBar__List {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    list-style: none;
+}
+
+.NavBar__List li {
+    padding: 10px 25px;
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.NavBar__List li a {
+    color: black;
+    text-decoration: none;
+}
+
+.NavBar__List li a.active {
+    font-weight: 700;
+    font-size: 15px;
+    color: red !important;
+}
+
+.NavBar__List li a:hover {
+    color: rgb(44, 39, 39);
+    transition: all 0.15s;
+    font-size: 15.5px;
+}
